@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="si">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Flexico Loan Form</title>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: #f0f3f7;
+    margin: 0;
+    padding: 15px;
+}
+.container {
+    max-width: 480px;
+    margin: auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+label {
+    display: block;
+    margin-top: 15px;
+    font-size: 14px;
+    color: #333;
+}
+input {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    margin-top: 5px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+.disclaimer {
+    font-size: 13px;
+    color: #555;
+    background: #f9f9f9;
+    padding: 10px;
+    border-left: 4px solid #007bff;
+    border-radius: 4px;
+    margin-top: 10px;
+    line-height: 1.5;
+}
+#sig-box {
+    margin-top: 12px;
+    border: 2px dashed #aaa;
+    border-radius: 8px;
+    background: #fff;
+    padding: 10px;
+    touch-action: none;
+}
+#sig {
+    width: 100%;
+    height: 200px;
+    background: #fff;
+    border-radius: 6px;
+    touch-action: none;
+}
+button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 12px;
+    font-size: 17px;
+    border: none;
+    border-radius: 8px;
+    background: #007bff;
+    color: #fff;
+    cursor: pointer;
+}
+button.secondary {
+    background: #555;
+}
+
+/* Loading overlay */
+#loadingOverlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(255,255,255,0.8);
+    z-index: 9999;
+    text-align: center;
+    padding-top: 20%;
+}
+.spinner {
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #007bff;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    margin: auto;
+    animation: spin 1s linear infinite;
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+#result {
+    display: none;
+    margin-top: 20px;
+    padding: 15px;
+    background: #fff;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+}
+#successMsg {
+    color: green;
+    font-weight: bold;
+    margin-top: 10px;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h3>Flexico – ණය තහවුරු කිරීම</h3>
+
+    <label>නම</label>
+    <input id="name" type="text">
+
+    <label>මුදල</label>
+    <input id="amount" type="text">
+
+    <label>NIC</label>
+    <input id="nic" type="text">
+
+    <label>ඔබගේ පොරොන්දු</label>
+    <p class="disclaimer">
+        මෙයින් ප්‍රකාශ කරන්නේ, මා විසින් ලබාගන්නා මෙම මුදලට අදාළ සියලුම පොලී අනුපාත, නියමිත වාරික ප්‍රමාණ, සහ ගෙවීම් කාලසීමා සම්පූර්ණයෙන්ම ගෙවීමට මම පොරොන්දු වන බවයි.<br><br>
+        අදාල පියවර පිළිබඳ කිසිදු වංචාවක්, වකවානුවක්, හෝ පෙරහැරීමක් මාගේ අතින් සිදුවන්නේ නම්, එවිසින් ඇතිවිය හැකි සියලුම නීතිමය ක්‍රියාමාර්ග, වගකීම්, සහ බදුන් සම්පූර්ණයෙන්ම භාරගන්නේ මා වන බව මෙයින් තවදුරටත් මම පිළිගනිමි.<br><br>
+        මෙම ප්‍රකාශය මම සම්පූර්ණ අවබෝධය සහිතව, කිසිදු බලපෑමකින් තොරව, මාගේම ස්වෙච්ඡාවෙන් සිදුකරමි.
+    </p>
+
+    <label>අත්සන්</label>
+    <div id="sig-box">
+        <canvas id="sig"></canvas>
+    </div>
+
+    <button onclick="submitForm()">Submit</button>
+    <button class="secondary" onclick="clearSig()">Clear Signature</button>
+</div>
+
+<!-- Loading overlay -->
+<div id="loadingOverlay">
+    <div class="spinner"></div>
+    <p>ඔබගේ විස්තර පරික්ෂා කෙරෙමින් පවතී…</p>
+</div>
+
+<div id="result">
+    <h4>ඉල්ලීම් විස්තර</h4>
+    <p><b>නම:</b> <span id="r_name"></span></p>
+    <p><b>මුදල:</b> <span id="r_amount"></span></p>
+    <p><b>NIC:</b> <span id="r_nic"></span></p>
+    <p><b>අත්සන්:</b></p>
+    <img id="r_sig" style="width:200px;border:1px solid #666;">
+    <p id="successMsg"></p>
+</div>
+
+<script>
+// Canvas Setup with smoothing
+const canvas = document.getElementById("sig");
+const ctx = canvas.getContext("2d");
+let points = [];
+
+function resizeCanvas(){
+    const box = document.getElementById("sig-box");
+    canvas.width = box.clientWidth;
+    canvas.height = 200;
+}
+resizeCanvas();
+window.addEventListener("resize", resizeCanvas);
+
+function getPos(e){
+    const rect = canvas.getBoundingClientRect();
+    const x = (e.touches ? e.touches[0].clientX : e.clientX) - rect.left;
+    const y = (e.touches ? e.touches[0].clientY : e.clientY) - rect.top;
+    return {x,y};
+}
+
+let drawing=false;
+
+function drawLine(){
+    if(points.length<3) return;
+    const p1 = points[points.length-3];
+    const p2 = points[points.length-2];
+    const p3 = points[points.length-1];
+    ctx.beginPath();
+    ctx.moveTo(p1.x,p1.y);
+    ctx.quadraticCurveTo(p2.x,p2.y,p3.x,p3.y);
+    ctx.stroke();
+}
+
+canvas.addEventListener("touchstart", e => {
+    e.preventDefault();
+    drawing=true;
+    points=[];
+    const p = getPos(e);
+    points.push(p);
+});
+canvas.addEventListener("touchmove", e => {
+    if(!drawing) return;
+    e.preventDefault();
+    const p = getPos(e);
+    points.push(p);
+    ctx.lineWidth=2;
+    ctx.lineCap="round";
+    ctx.strokeStyle="#000";
+    drawLine();
+});
+canvas.addEventListener("touchend", ()=>drawing=false);
+
+canvas.addEventListener("mousedown", e => {
+    drawing=true;
+    points=[];
+    const p=getPos(e);
+    points.push(p);
+});
+canvas.addEventListener("mousemove", e => {
+    if(!drawing) return;
+    const p=getPos(e);
+    points.push(p);
+    ctx.lineWidth=2;
+    ctx.lineCap="round";
+    ctx.strokeStyle="#000";
+    drawLine();
+});
+canvas.addEventListener("mouseup", ()=>drawing=false);
+
+function clearSig(){ ctx.clearRect(0,0,canvas.width,canvas.height); }
+
+function submitForm(){
+    const name = document.getElementById("name").value;
+    const amount = document.getElementById("amount").value;
+    const nic = document.getElementById("nic").value;
+
+    if(!name || !amount || !nic){
+        alert("සියලු විස්තර ඇතුල් කරන්න");
+        return;
+    }
+
+    document.getElementById("loadingOverlay").style.display = "block";
+    document.getElementById("result").style.display = "none";
+
+    setTimeout(()=>{
+        document.getElementById("loadingOverlay").style.display = "none";
+        document.getElementById("r_name").innerText = name;
+        document.getElementById("r_amount").innerText = amount;
+        document.getElementById("r_nic").innerText = nic;
+        document.getElementById("r_sig").src = canvas.toDataURL("image/png");
+        document.getElementById("result").style.display = "block";
+        document.getElementById("successMsg").innerText = "විස්තර යවා ඇත";
+        window.scrollTo({top: document.body.scrollHeight, behavior:"smooth"});
+    }, 5000); // 5-second delay
+}
+</script>
+
+</body>
+</html>
