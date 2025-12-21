@@ -24,6 +24,17 @@ html,body{
   color:#fff;
 }
 
+/* ===== ANIMATION BASE ===== */
+.fade-up{
+  opacity:0;
+  transform:translateY(24px);
+  transition:all .7s ease;
+}
+.fade-up.show{
+  opacity:1;
+  transform:translateY(0);
+}
+
 /* ================= APP ================= */
 .app{
   min-height:100vh;
@@ -134,23 +145,6 @@ input[type=range]::-webkit-slider-thumb{
   font-size:13px;
 }
 
-/* ================= RESULTS ================= */
-.results{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:12px;
-  margin-top:16px;
-}
-
-.result-box{
-  background:#1a1a1a;
-  border-radius:14px;
-  padding:14px;
-}
-
-.r-label{font-size:12px;color:#aaa}
-.r-value{font-weight:900;font-size:16px}
-
 /* ================= APPLY BUTTON ================= */
 .apply-button{
   width:100%;
@@ -226,41 +220,6 @@ footer{
   margin-top:20px;
 }
 
-.footer-item{
-  display:flex;
-  gap:14px;
-  margin-bottom:20px;
-}
-
-.footer-icon{
-  width:40px;
-  height:40px;
-  background:#3b4f85;
-  border-radius:12px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-
-footer small{color:#cfd6ff}
-
-footer hr{
-  border:none;
-  border-top:1px solid rgba(255,255,255,.2);
-  margin:25px 0;
-}
-
-.footer-links{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:12px;
-}
-
-.footer-links a{
-  color:#fff;
-  text-decoration:none;
-}
-
 /* ================= FLOATING ================= */
 .floating-contact{
   position:fixed;
@@ -297,7 +256,6 @@ footer hr{
 
 @media(max-width:480px){
   body{padding-bottom:80px;}
-  .footer-links{grid-template-columns:1fr;}
   .floating-contact{bottom:90px;}
 }
 </style>
@@ -307,7 +265,7 @@ footer hr{
 
 <div class="app">
 
-<div class="topbar">
+<div class="topbar fade-up">
   <div class="brand">
     <div class="logo-img"></div>
     <div class="brand-text">ZyCredit</div>
@@ -315,10 +273,9 @@ footer hr{
   <button class="btn">Log in</button>
 </div>
 
-<div class="card">
+<div class="card fade-up">
   <div class="headline">ක්ෂණික ණය රු. 500,000 දක්වා</div>
   <div class="sub">විනාඩි කිහිපයකින් මුදල් ලබාගන්න</div>
-
   <div class="hero">ZyCredit — Online Loan</div>
 
   <div class="amount-display">
@@ -332,7 +289,7 @@ footer hr{
   <a href="#" class="apply-button">අයදුම් කරන්න</a>
 </div>
 
-<div class="steps">
+<div class="steps fade-up">
   <div class="step">
     <div class="icon">☝️</div>
     <div>
@@ -362,45 +319,30 @@ footer hr{
   </div>
 </div>
 
-<footer>
-  <div class="footer-item">
-    <div class="footer-icon">📞</div>
-    <div>
-      <strong>074 043 6005</strong><br>
-      <small>Seven days a week</small>
-    </div>
-  </div>
-
-  <div class="footer-item">
-    <div class="footer-icon">✉️</div>
-    <div><strong>info@zycredit.lk</strong></div>
-  </div>
-
-  <hr>
-
-  <div class="footer-links">
-    <a href="#">How to apply</a>
-    <a href="#">Repay loan</a>
-    <a href="#">FAQ</a>
-    <a href="#">Contact</a>
-  </div>
-
-  <hr>
-
-  <small>© 2024–2025 ZyCredit Pvt Ltd</small>
-</footer>
-
 </div>
 
 <div class="floating-contact">
   <a href="tel:0740436005" class="float-btn call">📞</a>
-  <a href="https://wa.me/94740436005" target="_blank" class="float-btn whatsapp">💬</a>
+  <a href="https://wa.me/94740436005" class="float-btn whatsapp">💬</a>
 </div>
 
 <script>
+/* RANGE */
 const r=document.getElementById("amountRange");
 const t=document.getElementById("amountText");
 r.oninput=()=>t.textContent=(+r.value).toLocaleString();
+
+/* FADE-UP ANIMATION */
+const items=document.querySelectorAll('.fade-up');
+const io=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add('show');
+    }
+  });
+},{threshold:.2});
+
+items.forEach(i=>io.observe(i));
 </script>
 
 </body>
