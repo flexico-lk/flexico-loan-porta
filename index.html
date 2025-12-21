@@ -1,82 +1,407 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="si">
 <head>
-  <meta charset="UTF-8">
-  <title>Footer UI</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>ZyCredit</title>
+
+<style>
+:root{
+  --primary:#d81b7d;
+  --secondary:#8e1d6b;
+  --bg:#0a0a0d;
+  --card:#14141a;
+}
+
+*{box-sizing:border-box}
+
+html,body{
+  margin:0;
+  padding:0;
+  font-family:"Segoe UI",Roboto,"Noto Sans Sinhala",Arial,sans-serif;
+  background:var(--bg);
+  color:#fff;
+}
+
+/* ================= APP ================= */
+.app{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  max-width:420px;
+  margin:auto;
+}
+
+/* ================= TOP BAR ================= */
+.topbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:14px 16px;
+  background:#0a0a0d;
+  position:sticky;
+  top:0;
+  z-index:100;
+  border-bottom:1px solid #1a1a1a;
+}
+
+.brand{
+  display:flex;
+  gap:10px;
+  align-items:center;
+}
+
+.logo-img{
+  width:42px;
+  height:42px;
+  border-radius:10px;
+  background:#333;
+}
+
+.brand-text{
+  font-weight:900;
+  font-size:16px;
+}
+
+.btn{
+  background:#1f1f1f;
+  color:#fff;
+  border:none;
+  border-radius:10px;
+  padding:10px 14px;
+}
+
+/* ================= CARD ================= */
+.card{
+  background:var(--card);
+  padding:20px 16px;
+  border-radius:16px;
+  margin:12px;
+}
+
+.headline{
+  text-align:center;
+  font-size:22px;
+  font-weight:900;
+}
+
+.sub{
+  text-align:center;
+  color:#bbb;
+  font-size:14px;
+  margin:8px 0 14px;
+}
+
+.hero{
+  background:linear-gradient(135deg,var(--primary),var(--secondary));
+  padding:18px;
+  border-radius:14px;
+  text-align:center;
+  font-weight:800;
+  margin-bottom:16px;
+}
+
+/* ================= RANGE ================= */
+.amount-display{
+  display:flex;
+  justify-content:space-between;
+  font-weight:800;
+}
+
+input[type=range]{
+  width:100%;
+  height:10px;
+  border-radius:10px;
+  appearance:none;
+  background:linear-gradient(135deg,var(--primary),var(--secondary));
+  margin:14px 0;
+}
+
+input[type=range]::-webkit-slider-thumb{
+  appearance:none;
+  width:28px;
+  height:28px;
+  border-radius:50%;
+  background:#fff;
+  border:6px solid var(--secondary);
+}
+
+.minmax{
+  display:flex;
+  justify-content:space-between;
+  color:#aaa;
+  font-size:13px;
+}
+
+/* ================= RESULTS ================= */
+.results{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  margin-top:16px;
+}
+
+.result-box{
+  background:#1a1a1a;
+  border-radius:14px;
+  padding:14px;
+}
+
+.r-label{font-size:12px;color:#aaa}
+.r-value{font-weight:900;font-size:16px}
+
+/* ================= APPLY BUTTON ================= */
+.apply-button{
+  width:100%;
+  display:block;
+  text-align:center;
+  padding:18px;
+  margin-top:18px;
+  border-radius:16px;
+  background:linear-gradient(135deg,var(--primary),var(--secondary));
+  color:#fff;
+  font-size:18px;
+  font-weight:900;
+  text-decoration:none;
+  transition:.3s;
+}
+
+.apply-button:hover{
+  transform:translateY(-3px);
+}
+
+/* ================= STEPS ================= */
+.steps{
+  background:#fff;
+  color:#000;
+  margin:12px;
+  border-radius:20px;
+  overflow:hidden;
+}
+
+.step{
+  display:flex;
+  gap:15px;
+  padding:22px;
+}
+
+.icon{
+  font-size:30px;
+  color:#1abc9c;
+}
+
+.step h3{margin:0;font-size:17px}
+.step p{margin-top:6px;font-size:14px;color:#777}
+
+.divider{
+  text-align:center;
+  border-top:2px dashed #ddd;
+}
+
+.arrow{
+  background:#1abc9c;
+  color:#fff;
+  padding:6px 10px;
+  border-radius:50%;
+  position:relative;
+  top:-14px;
+  font-size:12px;
+}
+
+.highlight{
+  background:#1abc9c;
+}
+
+.highlight h3,
+.highlight p,
+.highlight .icon{
+  color:#fff;
+}
+
+/* ================= FOOTER ================= */
+footer{
+  background:#243765;
+  padding:40px 20px;
+  margin-top:20px;
+}
+
+.footer-item{
+  display:flex;
+  gap:14px;
+  margin-bottom:20px;
+}
+
+.footer-icon{
+  width:40px;
+  height:40px;
+  background:#3b4f85;
+  border-radius:12px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+footer small{color:#cfd6ff}
+
+footer hr{
+  border:none;
+  border-top:1px solid rgba(255,255,255,.2);
+  margin:25px 0;
+}
+
+.footer-links{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+
+.footer-links a{
+  color:#fff;
+  text-decoration:none;
+}
+
+/* ================= FLOATING ================= */
+.floating-contact{
+  position:fixed;
+  right:16px;
+  bottom:20px;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  z-index:9999;
+}
+
+.float-btn{
+  width:56px;
+  height:56px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:24px;
+  color:#fff;
+  text-decoration:none;
+  box-shadow:0 6px 18px rgba(0,0,0,.3);
+  animation:pulse 2s infinite;
+}
+
+.float-btn.call{background:#f1b400}
+.float-btn.whatsapp{background:#25D366}
+
+@keyframes pulse{
+  0%{transform:scale(1)}
+  50%{transform:scale(1.08)}
+  100%{transform:scale(1)}
+}
+
+@media(max-width:480px){
+  body{padding-bottom:80px;}
+  .footer-links{grid-template-columns:1fr;}
+  .floating-contact{bottom:90px;}
+}
+</style>
 </head>
+
 <body>
 
-<footer class="footer">
-  <div class="footer-container">
+<div class="app">
 
-    <!-- Contact Info -->
-    <div class="contact-info">
-      <div class="info-item">
-        <i class="fas fa-phone"></i>
-        <div>
-          <strong>+94 11 7474 111</strong>
-          <span>Seven days a week</span>
-        </div>
-      </div>
-
-      <div class="info-item">
-        <i class="fas fa-envelope"></i>
-        <strong>info@cashx.lk</strong>
-      </div>
-
-      <div class="info-item">
-        <i class="fas fa-clock"></i>
-        <strong>All days: 8.30 am - 5.30 pm</strong>
-      </div>
-    </div>
-
-    <!-- Links -->
-    <div class="footer-links">
-      <div>
-        <a href="#">How to apply for a loan</a>
-        <a href="#">FAQ</a>
-      </div>
-      <div>
-        <a href="#">How to repay a loan</a>
-        <a href="#">Contact Us</a>
-      </div>
-    </div>
-
-    <hr>
-
-    <!-- App Downloads -->
-    <div class="app-section">
-      <h3>Download our Mobile App</h3>
-      <p>for a faster and efficient service</p>
-
-      <div class="app-buttons">
-        <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="App Store">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Google Play">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Huawei_AppGallery_badge_EN.svg" alt="AppGallery">
-      </div>
-    </div>
-
-    <hr>
-
-    <!-- Social -->
-    <div class="social">
-      <span>Our social networks</span>
-      <div class="icons">
-        <i class="fab fa-facebook-f"></i>
-        <i class="fab fa-linkedin-in"></i>
-      </div>
-    </div>
-
-    <!-- Copyright -->
-    <p class="copyright">
-      © 2019 - 2025 All Rights Reserved. A V Business Solutions (Private) Limited
-    </p>
-
+<div class="topbar">
+  <div class="brand">
+    <div class="logo-img"></div>
+    <div class="brand-text">ZyCredit</div>
   </div>
+  <button class="btn">Log in</button>
+</div>
+
+<div class="card">
+  <div class="headline">ක්ෂණික ණය රු. 500,000 දක්වා</div>
+  <div class="sub">විනාඩි කිහිපයකින් මුදල් ලබාගන්න</div>
+
+  <div class="hero">ZyCredit — Online Loan</div>
+
+  <div class="amount-display">
+    <span>ණය මුදල</span>
+    <span>රු <span id="amountText">30,000</span></span>
+  </div>
+
+  <input type="range" id="amountRange" min="30000" max="500000" step="10000" value="30000">
+  <div class="minmax"><span>30,000</span><span>500,000</span></div>
+
+  <a href="#" class="apply-button">අයදුම් කරන්න</a>
+</div>
+
+<div class="steps">
+  <div class="step">
+    <div class="icon">☝️</div>
+    <div>
+      <h3>අයදුම්පත පුරවන්න</h3>
+      <p>ඔබගේ විස්තර ඇතුලත් කරන්න</p>
+    </div>
+  </div>
+
+  <div class="divider"><span class="arrow">⌄⌄</span></div>
+
+  <div class="step">
+    <div class="icon">💰</div>
+    <div>
+      <h3>සමාලෝචනය</h3>
+      <p>විනාඩි කිහිපයකින් ප්‍රතිචාර</p>
+    </div>
+  </div>
+
+  <div class="divider"><span class="arrow">⌄⌄</span></div>
+
+  <div class="step highlight">
+    <div class="icon">💵</div>
+    <div>
+      <h3>මුදල් ලබාගන්න</h3>
+      <p>බැංකු ගිණුමට බැර වේ</p>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-item">
+    <div class="footer-icon">📞</div>
+    <div>
+      <strong>074 043 6005</strong><br>
+      <small>Seven days a week</small>
+    </div>
+  </div>
+
+  <div class="footer-item">
+    <div class="footer-icon">✉️</div>
+    <div><strong>info@zycredit.lk</strong></div>
+  </div>
+
+  <hr>
+
+  <div class="footer-links">
+    <a href="#">How to apply</a>
+    <a href="#">Repay loan</a>
+    <a href="#">FAQ</a>
+    <a href="#">Contact</a>
+  </div>
+
+  <hr>
+
+  <small>© 2024–2025 ZyCredit Pvt Ltd</small>
 </footer>
+
+</div>
+
+<div class="floating-contact">
+  <a href="tel:0740436005" class="float-btn call">📞</a>
+  <a href="https://wa.me/94740436005" target="_blank" class="float-btn whatsapp">💬</a>
+</div>
+
+<script>
+const r=document.getElementById("amountRange");
+const t=document.getElementById("amountText");
+r.oninput=()=>t.textContent=(+r.value).toLocaleString();
+</script>
 
 </body>
 </html>
