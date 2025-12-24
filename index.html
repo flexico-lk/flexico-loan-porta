@@ -1,348 +1,248 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="si">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-<title>ZyCredit</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>eZycredit – Loan Calculator</title>
+<meta name="theme-color" content="#16c172">
 
 <style>
 :root{
-  --primary:#d81b7d;
-  --secondary:#8e1d6b;
-  --bg:#0a0a0d;
-  --card:#14141a;
+  --green:#16c172;
+  --green-dark:#0aa764;
+  --green-soft:#e9f7f1;
+  --bg:#f4f8f8;
+  --card:#ffffff;
+  --text-main:#0c1328;
+  --text-muted:#8b98a0;
+
+  --fs-xs:12px;
+  --fs-sm:14px;
+  --fs-md:16px;
+  --fs-lg:18px;
 }
 
-*{box-sizing:border-box}
+/* RESET */
+*{box-sizing:border-box;}
+body{margin:0;font-family:"Segoe UI","Noto Sans Sinhala",sans-serif;background:var(--bg);color:var(--text-main);font-size:var(--fs-md);}
 
-html,body{
-  margin:0;
-  padding:0;
-  font-family:"Segoe UI",Roboto,"Noto Sans Sinhala",Arial,sans-serif;
-  background:var(--bg);
-  color:#fff;
-}
+/* TOPBAR */
+.topbar{position:sticky;top:0;background:#fff;padding:12px 14px;display:flex;align-items:center;box-shadow:0 3px 10px rgba(0,0,0,.05);z-index:10;}
+.logo{display:flex;gap:10px;align-items:center;}
+.logo-box{width:42px;height:42px;background:linear-gradient(135deg,var(--green),var(--green-dark));color:#fff;border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:800;}
 
-/* ===== ANIMATION BASE ===== */
-.fade-up{
-  opacity:0;
-  transform:translateY(24px);
-  transition:all .7s ease;
-}
-.fade-up.show{
-  opacity:1;
-  transform:translateY(0);
-}
+/* CARD */
+.card{background:var(--card);margin:14px;padding:16px;border-radius:16px;box-shadow:0 10px 25px rgba(0,0,0,.06);}
 
-/* ================= APP ================= */
-.app{
-  min-height:100vh;
-  display:flex;
-  flex-direction:column;
-  max-width:420px;
-  margin:auto;
-}
+/* HERO */
+.hero{background:linear-gradient(90deg,var(--green),var(--green-dark));color:#fff;padding:22px;border-radius:14px;text-align:center;font-weight:800;}
 
-/* ================= TOP BAR ================= */
-.topbar{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:14px 16px;
-  background:#0a0a0d;
-  position:sticky;
-  top:0;
-  z-index:100;
-  border-bottom:1px solid #1a1a1a;
-}
+/* RANGE */
+.amount{display:flex;justify-content:space-between;font-weight:700;margin:16px 0 6px;}
+input[type=range]{width:100%;}
 
-.brand{
-  display:flex;
-  gap:10px;
-  align-items:center;
-}
+/* RESULTS */
+.results{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px;}
+.box{background:var(--green-soft);padding:12px;border-radius:12px;}
+.label{font-size:var(--fs-xs);color:var(--text-muted);}
+.value{font-weight:800;}
 
-.logo-img{
-  width:42px;
-  height:42px;
-  border-radius:10px;
-  background:#333;
-}
+/* BREAKDOWN */
+.breakdown{margin-top:16px;background:#f9fcfb;border-radius:12px;padding:14px;}
+.breakdown h4{margin:0 0 10px;color:var(--green-dark);}
+.row{display:flex;justify-content:space-between;margin:6px 0;}
 
-.brand-text{
-  font-weight:900;
-  font-size:16px;
-}
+/* IMAGE SECTION */
+.image-section img{width:100%;border-radius:14px;opacity:0;transform:translateY(30px) scale(0.95);transition:all .6s ease;}
+.image-section.show img{opacity:1;transform:translateY(0) scale(1);}
 
-.btn{
-  background:#1f1f1f;
-  color:#fff;
-  border:none;
-  border-radius:10px;
-  padding:10px 14px;
-}
+/* CONTACT */
+.contact-item{display:flex;align-items:center;gap:14px;text-decoration:none;margin-bottom:22px;}
+.icon-box{width:52px;height:52px;background:var(--green-soft);border-radius:14px;display:flex;align-items:center;justify-content:center;}
+.icon{width:26px;height:26px;fill:var(--green-dark);}
+.main-text{font-size:var(--fs-lg);font-weight:800;}
+.email-text{font-size:15px;font-weight:600;}
+.sub-text{font-size:var(--fs-sm);color:var(--text-muted);}
+.highlight{color:var(--green-dark);font-weight:800;}
 
-/* ================= CARD ================= */
-.card{
-  background:var(--card);
-  padding:20px 16px;
-  border-radius:16px;
-  margin:12px;
-}
+/* BUTTON */
+.apply{width:100%;padding:14px;background:linear-gradient(90deg,var(--green),var(--green-dark));color:#fff;border:none;border-radius:14px;font-size:var(--fs-lg);font-weight:800;}
 
-.headline{
-  text-align:center;
-  font-size:22px;
-  font-weight:900;
-}
+/* FOOTER */
+footer{text-align:center;padding:16px;background:#f1f5f4;font-size:var(--fs-sm);color:#7b8794;}
 
-.sub{
-  text-align:center;
-  color:#bbb;
-  font-size:14px;
-  margin:8px 0 14px;
-}
-
-.hero{
-  background:linear-gradient(135deg,var(--primary),var(--secondary));
-  padding:18px;
-  border-radius:14px;
-  text-align:center;
-  font-weight:800;
-  margin-bottom:16px;
-}
-
-/* ================= RANGE ================= */
-.amount-display{
-  display:flex;
-  justify-content:space-between;
-  font-weight:800;
-}
-
-input[type=range]{
-  width:100%;
-  height:10px;
-  border-radius:10px;
-  appearance:none;
-  background:linear-gradient(135deg,var(--primary),var(--secondary));
-  margin:14px 0;
-}
-
-input[type=range]::-webkit-slider-thumb{
-  appearance:none;
-  width:28px;
-  height:28px;
-  border-radius:50%;
-  background:#fff;
-  border:6px solid var(--secondary);
-}
-
-.minmax{
-  display:flex;
-  justify-content:space-between;
-  color:#aaa;
-  font-size:13px;
-}
-
-/* ================= APPLY BUTTON ================= */
-.apply-button{
-  width:100%;
-  display:block;
-  text-align:center;
-  padding:18px;
-  margin-top:18px;
-  border-radius:16px;
-  background:linear-gradient(135deg,var(--primary),var(--secondary));
-  color:#fff;
-  font-size:18px;
-  font-weight:900;
-  text-decoration:none;
-  transition:.3s;
-}
-
-.apply-button:hover{
-  transform:translateY(-3px);
-}
-
-/* ================= STEPS ================= */
-.steps{
-  background:#fff;
-  color:#000;
-  margin:12px;
-  border-radius:20px;
-  overflow:hidden;
-}
-
-.step{
-  display:flex;
-  gap:15px;
-  padding:22px;
-}
-
-.icon{
-  font-size:30px;
-  color:#1abc9c;
-}
-
-.step h3{margin:0;font-size:17px}
-.step p{margin-top:6px;font-size:14px;color:#777}
-
-.divider{
-  text-align:center;
-  border-top:2px dashed #ddd;
-}
-
-.arrow{
-  background:#1abc9c;
-  color:#fff;
-  padding:6px 10px;
-  border-radius:50%;
-  position:relative;
-  top:-14px;
-  font-size:12px;
-}
-
-.highlight{
-  background:#1abc9c;
-}
-
-.highlight h3,
-.highlight p,
-.highlight .icon{
-  color:#fff;
-}
-
-/* ================= FOOTER ================= */
-footer{
-  background:#243765;
-  padding:40px 20px;
-  margin-top:20px;
-}
-
-/* ================= FLOATING ================= */
-.floating-contact{
-  position:fixed;
-  right:16px;
-  bottom:20px;
-  display:flex;
-  flex-direction:column;
-  gap:12px;
-  z-index:9999;
-}
-
-.float-btn{
-  width:56px;
-  height:56px;
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:24px;
-  color:#fff;
-  text-decoration:none;
-  box-shadow:0 6px 18px rgba(0,0,0,.3);
-  animation:pulse 2s infinite;
-}
-
-.float-btn.call{background:#f1b400}
-.float-btn.whatsapp{background:#25D366}
-
-@keyframes pulse{
-  0%{transform:scale(1)}
-  50%{transform:scale(1.08)}
-  100%{transform:scale(1)}
-}
-
-@media(max-width:480px){
-  body{padding-bottom:80px;}
-  .floating-contact{bottom:90px;}
-}
+/* STICKY */
+.sticky{position:fixed;bottom:12px;left:12px;right:12px;}
 </style>
 </head>
 
 <body>
 
-<div class="app">
-
-<div class="topbar fade-up">
-  <div class="brand">
-    <div class="logo-img"></div>
-    <div class="brand-text">ZyCredit</div>
+<div class="topbar">
+  <div class="logo">
+    <div class="logo-box">eZ</div>
+    <div>
+      <strong>eZycredit</strong><br>
+      <small style="color:var(--text-muted)">ඔබේ විශ්වාසදායක ණය සහකරු</small>
+    </div>
   </div>
-  <button class="btn">Log in</button>
 </div>
 
-<div class="card fade-up">
-  <div class="headline">ක්ෂණික ණය රු. 500,000 දක්වා</div>
-  <div class="sub">විනාඩි කිහිපයකින් මුදල් ලබාගන්න</div>
-  <div class="hero">ZyCredit — Online Loan</div>
+<div class="card">
+  <div class="hero">ක්ෂණික මුදල් රු.500,000 දක්වා</div>
 
-  <div class="amount-display">
+  <div class="amount">
     <span>ණය මුදල</span>
-    <span>රු <span id="amountText">30,000</span></span>
+    <span>රු <span id="amt">500,000</span></span>
   </div>
+  <input type="range" min="30000" max="500000" step="10000" value="500000" id="amountRange">
 
-  <input type="range" id="amountRange" min="30000" max="500000" step="10000" value="30000">
-  <div class="minmax"><span>30,000</span><span>500,000</span></div>
+  <div class="amount">
+    <span>කාලය</span>
+    <span><span id="mVal">12</span> මාස</span>
+  </div>
+  <input type="range" min="6" max="24" step="3" value="12" id="monthRange">
 
-  <a href="#" class="apply-button">අයදුම් කරන්න</a>
-</div>
-
-<div class="steps fade-up">
-  <div class="step">
-    <div class="icon">☝️</div>
-    <div>
-      <h3>අයදුම්පත පුරවන්න</h3>
-      <p>ඔබගේ විස්තර ඇතුලත් කරන්න</p>
+  <div class="results">
+    <div class="box">
+      <div class="label">පොලී අනුපාතය</div>
+      <div class="value">
+        0.833% <small>(මාසික)</small><br>
+        10.47% <small>(වාර්ෂික)</small>
+      </div>
+    </div>
+    <div class="box">
+      <div class="label">මාසික වාරිකය</div>
+      <div class="value" id="monthly">රු 0</div>
+    </div>
+    <div class="box">
+      <div class="label">කාලය</div>
+      <div class="value" id="months">12 මාස</div>
+    </div>
+    <div class="box">
+      <div class="label">මුළු ගෙවීම</div>
+      <div class="value" id="total">රු 0</div>
     </div>
   </div>
 
-  <div class="divider"><span class="arrow">⌄⌄</span></div>
-
-  <div class="step">
-    <div class="icon">💰</div>
-    <div>
-      <h3>සමාලෝචනය</h3>
-      <p>විනාඩි කිහිපයකින් ප්‍රතිචාර</p>
-    </div>
+  <div class="breakdown">
+    <h4>Finance Breakdown</h4>
+    <div class="row"><span>ණය මුදල</span><strong id="bLoan"></strong></div>
+    <div class="row"><span>මුළු පොලිය</span><strong id="bInterest"></strong></div>
+    <div class="row"><span>මාසික වාරිකය</span><strong id="bMonthly"></strong></div>
+    <div class="row"><span>මුළු ගෙවීම</span><strong id="bTotal"></strong></div>
   </div>
+</div>
 
-  <div class="divider"><span class="arrow">⌄⌄</span></div>
+<div class="card image-section">
+  <img src="https://via.placeholder.com/400x220" alt="Loan App">
+</div>
 
-  <div class="step highlight">
-    <div class="icon">💵</div>
+<div class="card">
+  <!-- PHONE -->
+  <a href="tel:+94740436005" class="contact-item">
+    <div class="icon-box">
+      <svg viewBox="0 0 24 24" class="icon">
+        <path d="M6.6 10.8c1.5 3 3.6 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1.1-.3
+        1.2.4 2.5.6 3.8.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.1
+        21 3 13.9 3 5c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1
+        0 1.3.2 2.6.6 3.8.1.4 0 .8-.3 1.1L6.6 10.8z"/>
+      </svg>
+    </div>
     <div>
-      <h3>මුදල් ලබාගන්න</h3>
-      <p>බැංකු ගිණුමට බැර වේ</p>
+      <div class="main-text"><span class="highlight">074</span> 043 6005</div>
+      <div class="sub-text">Call Now</div>
+    </div>
+  </a>
+
+  <!-- EMAIL -->
+  <a href="mailto:eZycredit@gmail.com" class="contact-item">
+    <div class="icon-box">
+      <svg viewBox="0 0 24 24" class="icon">
+        <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16
+        c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/>
+      </svg>
+    </div>
+    <div>
+      <div class="main-text email-text">eZycredit@gmail.com</div>
+      <div class="sub-text">Email</div>
+    </div>
+  </a>
+
+  <!-- TIME -->
+  <div class="contact-item">
+    <div class="icon-box">
+      <svg viewBox="0 0 24 24" class="icon">
+        <path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm1
+        11h5v-2h-4V7h-2v6z"/>
+      </svg>
+    </div>
+    <div>
+      <div class="main-text">
+        Monday – Friday<br>9.00 AM – 9.00 PM
+      </div>
+      <div class="sub-text">Business Hours</div>
     </div>
   </div>
 </div>
 
-</div>
+<footer>
+© 2019 – 2025 A V Business Solutions (Pvt) Ltd<br>
+All Rights Reserved
+</footer>
 
-<div class="floating-contact">
-  <a href="tel:0740436005" class="float-btn call">📞</a>
-  <a href="https://wa.me/94740436005" class="float-btn whatsapp">💬</a>
+<div class="sticky">
+  <a href="https://wa.me/94740436005" style="text-decoration:none">
+    <button class="apply">Apply Now</button>
+  </a>
 </div>
 
 <script>
-/* RANGE */
-const r=document.getElementById("amountRange");
-const t=document.getElementById("amountText");
-r.oninput=()=>t.textContent=(+r.value).toLocaleString();
+const amountRange=document.getElementById("amountRange");
+const monthRange=document.getElementById("monthRange");
+const amt=document.getElementById("amt");
+const mVal=document.getElementById("mVal");
+const monthly=document.getElementById("monthly");
+const total=document.getElementById("total");
+const months=document.getElementById("months");
+const bLoan=document.getElementById("bLoan");
+const bInterest=document.getElementById("bInterest");
+const bMonthly=document.getElementById("bMonthly");
+const bTotal=document.getElementById("bTotal");
 
-/* FADE-UP ANIMATION */
-const items=document.querySelectorAll('.fade-up');
-const io=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting){
-      e.target.classList.add('show');
-    }
+function calc(){
+  const P=+amountRange.value;
+  const n=+monthRange.value;
+  const r=0.00833;
+
+  const emi=Math.round(P*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1));
+  const totalPay=emi*n;
+  const interest=totalPay-P;
+
+  amt.innerText=P.toLocaleString();
+  mVal.innerText=n;
+  months.innerText=n+" මාස";
+
+  monthly.innerText="රු "+emi.toLocaleString();
+  total.innerText="රු "+totalPay.toLocaleString();
+
+  bLoan.innerText="රු "+P.toLocaleString();
+  bInterest.innerText="රු "+interest.toLocaleString();
+  bMonthly.innerText="රු "+emi.toLocaleString();
+  bTotal.innerText="රු "+totalPay.toLocaleString();
+}
+amountRange.oninput=calc;
+monthRange.oninput=calc;
+calc();
+
+/* Image animation */
+const imgSection=document.querySelector(".image-section");
+const obs=new IntersectionObserver(e=>{
+  e.forEach(x=>{
+    if(x.isIntersecting) x.target.classList.add("show");
   });
-},{threshold:.2});
-
-items.forEach(i=>io.observe(i));
+},{threshold:0.3});
+obs.observe(imgSection);
 </script>
 
 </body>
