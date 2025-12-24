@@ -15,64 +15,196 @@
   --card:#ffffff;
   --text-main:#0c1328;
   --text-muted:#8b98a0;
-
-  --fs-xs:12px;
-  --fs-sm:14px;
-  --fs-md:16px;
-  --fs-lg:18px;
 }
 
 /* RESET */
 *{box-sizing:border-box;}
-body{margin:0;font-family:"Segoe UI","Noto Sans Sinhala",sans-serif;background:var(--bg);color:var(--text-main);font-size:var(--fs-md);}
+body{
+  margin:0;
+  font-family:"Segoe UI","Noto Sans Sinhala",sans-serif;
+  background:var(--bg);
+  color:var(--text-main);
+}
 
 /* TOPBAR */
-.topbar{position:sticky;top:0;background:#fff;padding:12px 14px;display:flex;align-items:center;box-shadow:0 3px 10px rgba(0,0,0,.05);z-index:10;}
+.topbar{
+  position:sticky;
+  top:0;
+  background:#fff;
+  padding:12px 14px;
+  display:flex;
+  align-items:center;
+  box-shadow:0 3px 10px rgba(0,0,0,.05);
+  z-index:10;
+}
 .logo{display:flex;gap:10px;align-items:center;}
-.logo-box{width:42px;height:42px;background:linear-gradient(135deg,var(--green),var(--green-dark));color:#fff;border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:800;}
+.logo-box{
+  width:42px;height:42px;
+  background:linear-gradient(135deg,var(--green),var(--green-dark));
+  color:#fff;
+  border-radius:12px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:800;
+}
 
 /* CARD */
-.card{background:var(--card);margin:14px;padding:16px;border-radius:16px;box-shadow:0 10px 25px rgba(0,0,0,.06);}
+.card{
+  background:var(--card);
+  margin:14px;
+  padding:16px;
+  border-radius:16px;
+  box-shadow:0 10px 25px rgba(0,0,0,.06);
+}
 
 /* HERO */
-.hero{background:linear-gradient(90deg,var(--green),var(--green-dark));color:#fff;padding:22px;border-radius:14px;text-align:center;font-weight:800;}
+.hero{
+  background:linear-gradient(90deg,var(--green),var(--green-dark));
+  color:#fff;
+  padding:22px;
+  border-radius:14px;
+  text-align:center;
+  font-weight:800;
+}
 
 /* RANGE */
-.amount{display:flex;justify-content:space-between;font-weight:700;margin:16px 0 6px;}
+.amount{
+  display:flex;
+  justify-content:space-between;
+  font-weight:700;
+  margin:16px 0 6px;
+}
 input[type=range]{width:100%;}
 
 /* RESULTS */
-.results{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px;}
-.box{background:var(--green-soft);padding:12px;border-radius:12px;}
-.label{font-size:var(--fs-xs);color:var(--text-muted);}
+.results{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-top:14px;
+}
+.box{
+  background:var(--green-soft);
+  padding:12px;
+  border-radius:12px;
+}
+.label{font-size:12px;color:var(--text-muted);}
 .value{font-weight:800;}
 
 /* BREAKDOWN */
-.breakdown{margin-top:16px;background:#f9fcfb;border-radius:12px;padding:14px;}
+.breakdown{
+  margin-top:16px;
+  background:#f9fcfb;
+  border-radius:12px;
+  padding:14px;
+}
 .breakdown h4{margin:0 0 10px;color:var(--green-dark);}
 .row{display:flex;justify-content:space-between;margin:6px 0;}
 
 /* IMAGE SECTION */
-.image-section img{width:100%;border-radius:14px;opacity:0;transform:translateY(30px) scale(0.95);transition:all .6s ease;}
-.image-section.show img{opacity:1;transform:translateY(0) scale(1);}
+.image-section img{
+  width:100%;
+  border-radius:14px;
+  opacity:0;
+  transform:translateY(30px) scale(.95);
+  transition:.6s ease;
+}
+.image-section.show img{
+  opacity:1;
+  transform:translateY(0) scale(1);
+}
 
 /* CONTACT */
-.contact-item{display:flex;align-items:center;gap:14px;text-decoration:none;margin-bottom:22px;}
-.icon-box{width:52px;height:52px;background:var(--green-soft);border-radius:14px;display:flex;align-items:center;justify-content:center;}
+.contact-item{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  text-decoration:none;
+  margin-bottom:22px;
+}
+.icon-box{
+  width:52px;height:52px;
+  background:var(--green-soft);
+  border-radius:14px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
 .icon{width:26px;height:26px;fill:var(--green-dark);}
-.main-text{font-size:var(--fs-lg);font-weight:800;}
-.email-text{font-size:15px;font-weight:600;}
-.sub-text{font-size:var(--fs-sm);color:var(--text-muted);}
-.highlight{color:var(--green-dark);font-weight:800;}
+.main-text{font-size:18px;font-weight:800;}
+.sub-text{font-size:14px;color:var(--text-muted);}
 
 /* BUTTON */
-.apply{width:100%;padding:14px;background:linear-gradient(90deg,var(--green),var(--green-dark));color:#fff;border:none;border-radius:14px;font-size:var(--fs-lg);font-weight:800;}
+.apply{
+  width:100%;
+  padding:14px;
+  background:linear-gradient(90deg,var(--green),var(--green-dark));
+  color:#fff;
+  border:none;
+  border-radius:14px;
+  font-size:18px;
+  font-weight:800;
+}
 
-/* FOOTER */
-footer{text-align:center;padding:16px;background:#f1f5f4;font-size:var(--fs-sm);color:#7b8794;}
+/* ===== FOOTER (SCREENSHOT MATCH) ===== */
+.app-footer{
+  background:#fff;
+  padding:28px 18px;
+  margin-top:20px;
+}
+.footer-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:24px;
+}
+.footer-logo{
+  font-size:26px;
+  font-weight:800;
+}
+.footer-socials img{
+  width:34px;
+  margin-left:10px;
+  opacity:.85;
+  transition:.3s;
+}
+.footer-socials img:hover{
+  opacity:1;
+  transform:scale(1.1);
+}
+.footer-block{margin-bottom:24px;}
+.footer-block h4{
+  font-size:20px;
+  margin-bottom:12px;
+}
+.footer-item{
+  font-size:16px;
+  color:#666;
+  margin:10px 0;
+}
+.footer-links a{
+  display:block;
+  font-size:16px;
+  color:#777;
+  margin:12px 0;
+  text-decoration:none;
+}
+.footer-links a:hover{color:var(--green-dark);}
+.footer-bottom{
+  text-align:center;
+  font-size:14px;
+  color:#999;
+  margin-top:10px;
+}
 
 /* STICKY */
-.sticky{position:fixed;bottom:12px;left:12px;right:12px;}
+.sticky{
+  position:fixed;
+  bottom:12px;
+  left:12px;
+  right:12px;
+}
 </style>
 </head>
 
@@ -88,6 +220,7 @@ footer{text-align:center;padding:16px;background:#f1f5f4;font-size:var(--fs-sm);
   </div>
 </div>
 
+<!-- CALCULATOR -->
 <div class="card">
   <div class="hero">ක්ෂණික මුදල් රු.500,000 දක්වා</div>
 
@@ -106,22 +239,19 @@ footer{text-align:center;padding:16px;background:#f1f5f4;font-size:var(--fs-sm);
   <div class="results">
     <div class="box">
       <div class="label">පොලී අනුපාතය</div>
-      <div class="value">
-        0.833% <small>(මාසික)</small><br>
-        10.47% <small>(වාර්ෂික)</small>
-      </div>
+      <div class="value">0.833% (මාසික)</div>
     </div>
     <div class="box">
       <div class="label">මාසික වාරිකය</div>
-      <div class="value" id="monthly">රු 0</div>
+      <div class="value" id="monthly"></div>
     </div>
     <div class="box">
       <div class="label">කාලය</div>
-      <div class="value" id="months">12 මාස</div>
+      <div class="value" id="months"></div>
     </div>
     <div class="box">
       <div class="label">මුළු ගෙවීම</div>
-      <div class="value" id="total">රු 0</div>
+      <div class="value" id="total"></div>
     </div>
   </div>
 
@@ -134,67 +264,43 @@ footer{text-align:center;padding:16px;background:#f1f5f4;font-size:var(--fs-sm);
   </div>
 </div>
 
+<!-- IMAGE -->
 <div class="card image-section">
-  <img src="https://via.placeholder.com/400x220" alt="Loan App">
+  <img src="https://via.placeholder.com/400x220">
 </div>
 
-<div class="card">
-  <!-- PHONE -->
-  <a href="tel:+94740436005" class="contact-item">
-    <div class="icon-box">
-      <svg viewBox="0 0 24 24" class="icon">
-        <path d="M6.6 10.8c1.5 3 3.6 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1.1-.3
-        1.2.4 2.5.6 3.8.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.1
-        21 3 13.9 3 5c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1
-        0 1.3.2 2.6.6 3.8.1.4 0 .8-.3 1.1L6.6 10.8z"/>
-      </svg>
-    </div>
-    <div>
-      <div class="main-text"><span class="highlight">074</span> 043 6005</div>
-      <div class="sub-text">Call Now</div>
-    </div>
-  </a>
-
-  <!-- EMAIL -->
-  <a href="mailto:eZycredit@gmail.com" class="contact-item">
-    <div class="icon-box">
-      <svg viewBox="0 0 24 24" class="icon">
-        <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16
-        c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/>
-      </svg>
-    </div>
-    <div>
-      <div class="main-text email-text">eZycredit@gmail.com</div>
-      <div class="sub-text">Email</div>
-    </div>
-  </a>
-
-  <!-- TIME -->
-  <div class="contact-item">
-    <div class="icon-box">
-      <svg viewBox="0 0 24 24" class="icon">
-        <path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm1
-        11h5v-2h-4V7h-2v6z"/>
-      </svg>
-    </div>
-    <div>
-      <div class="main-text">
-        Monday – Friday<br>9.00 AM – 9.00 PM
-      </div>
-      <div class="sub-text">Business Hours</div>
+<!-- FOOTER -->
+<footer class="app-footer">
+  <div class="footer-head">
+    <div class="footer-logo">eZloan</div>
+    <div class="footer-socials">
+      <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png">
+      <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png">
+      <img src="https://cdn-icons-png.flaticon.com/512/3536/3536505.png">
     </div>
   </div>
-</div>
 
-<footer>
-© 2019 – 2025 A V Business Solutions (Pvt) Ltd<br>
-All Rights Reserved
+  <div class="footer-block">
+    <h4>Contacts</h4>
+    <div class="footer-item">📞 +94 11 42 420 11</div>
+    <div class="footer-item">✉️ info@cashloan.lk</div>
+    <div class="footer-item">🕒 Mon – Sat : 8 am – 5 pm</div>
+  </div>
+
+  <div class="footer-block footer-links">
+    <h4>Legal & Resources</h4>
+    <a href="#">Privacy Policy</a>
+    <a href="#">Terms & Conditions</a>
+    <a href="#">Account Cancellation</a>
+  </div>
+
+  <div class="footer-bottom">
+    © 2025 All Rights Reserved
+  </div>
 </footer>
 
 <div class="sticky">
-  <a href="https://wa.me/94740436005" style="text-decoration:none">
-    <button class="apply">Apply Now</button>
-  </a>
+  <button class="apply">Apply Now</button>
 </div>
 
 <script>
@@ -214,7 +320,6 @@ function calc(){
   const P=+amountRange.value;
   const n=+monthRange.value;
   const r=0.00833;
-
   const emi=Math.round(P*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1));
   const totalPay=emi*n;
   const interest=totalPay-P;
@@ -222,7 +327,6 @@ function calc(){
   amt.innerText=P.toLocaleString();
   mVal.innerText=n;
   months.innerText=n+" මාස";
-
   monthly.innerText="රු "+emi.toLocaleString();
   total.innerText="රු "+totalPay.toLocaleString();
 
@@ -235,14 +339,11 @@ amountRange.oninput=calc;
 monthRange.oninput=calc;
 calc();
 
-/* Image animation */
-const imgSection=document.querySelector(".image-section");
-const obs=new IntersectionObserver(e=>{
-  e.forEach(x=>{
-    if(x.isIntersecting) x.target.classList.add("show");
-  });
-},{threshold:0.3});
-obs.observe(imgSection);
+/* image animation */
+const img=document.querySelector(".image-section");
+new IntersectionObserver(e=>{
+  if(e[0].isIntersecting) img.classList.add("show");
+}).observe(img);
 </script>
 
 </body>
