@@ -17,7 +17,6 @@
   --text-muted:#8b98a0;
 }
 
-/* RESET */
 *{box-sizing:border-box;}
 body{
   margin:0;
@@ -35,7 +34,6 @@ body{
   display:flex;
   align-items:center;
   box-shadow:0 3px 10px rgba(0,0,0,.05);
-  z-index:10;
 }
 .logo{display:flex;gap:10px;align-items:center;}
 .logo-box{
@@ -68,86 +66,17 @@ body{
   font-weight:800;
 }
 
-/* RANGE */
-.amount{
-  display:flex;
-  justify-content:space-between;
-  font-weight:700;
-  margin:16px 0 6px;
-}
-input[type=range]{width:100%;}
-
-/* RESULTS */
-.results{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
-  margin-top:14px;
-}
-.box{
-  background:var(--green-soft);
-  padding:12px;
-  border-radius:12px;
-}
-.label{font-size:12px;color:var(--text-muted);}
-.value{font-weight:800;}
-
-/* BREAKDOWN */
-.breakdown{
-  margin-top:16px;
-  background:#f9fcfb;
-  border-radius:12px;
-  padding:14px;
-}
-.breakdown h4{margin:0 0 10px;color:var(--green-dark);}
-.row{display:flex;justify-content:space-between;margin:6px 0;}
-
-/* IMAGE SECTION */
-.image-section img{
-  width:100%;
-  border-radius:14px;
-  opacity:0;
-  transform:translateY(30px) scale(.95);
-  transition:.6s ease;
-}
-.image-section.show img{
-  opacity:1;
-  transform:translateY(0) scale(1);
-}
-
-/* CONTACT */
-.contact-item{
-  display:flex;
-  align-items:center;
-  gap:14px;
+/* CONTACT LINK */
+.contact-link{
   text-decoration:none;
-  margin-bottom:22px;
-}
-.icon-box{
-  width:52px;height:52px;
-  background:var(--green-soft);
-  border-radius:14px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-.icon{width:26px;height:26px;fill:var(--green-dark);}
-.main-text{font-size:18px;font-weight:800;}
-.sub-text{font-size:14px;color:var(--text-muted);}
-
-/* BUTTON */
-.apply{
-  width:100%;
-  padding:14px;
-  background:linear-gradient(90deg,var(--green),var(--green-dark));
-  color:#fff;
-  border:none;
-  border-radius:14px;
-  font-size:18px;
+  color:var(--green-dark);
   font-weight:800;
 }
+.contact-link:hover{
+  text-decoration:underline;
+}
 
-/* ===== FOOTER (SCREENSHOT MATCH) ===== */
+/* FOOTER */
 .app-footer{
   background:#fff;
   padding:28px 18px;
@@ -166,12 +95,6 @@ input[type=range]{width:100%;}
 .footer-socials img{
   width:34px;
   margin-left:10px;
-  opacity:.85;
-  transition:.3s;
-}
-.footer-socials img:hover{
-  opacity:1;
-  transform:scale(1.1);
 }
 .footer-block{margin-bottom:24px;}
 .footer-block h4{
@@ -195,10 +118,17 @@ input[type=range]{width:100%;}
   text-align:center;
   font-size:14px;
   color:#999;
-  margin-top:10px;
 }
-
-/* STICKY */
+.apply{
+  width:100%;
+  padding:14px;
+  background:linear-gradient(90deg,var(--green),var(--green-dark));
+  color:#fff;
+  border:none;
+  border-radius:14px;
+  font-size:18px;
+  font-weight:800;
+}
 .sticky{
   position:fixed;
   bottom:12px;
@@ -220,56 +150,6 @@ input[type=range]{width:100%;}
   </div>
 </div>
 
-<!-- CALCULATOR -->
-<div class="card">
-  <div class="hero">ක්ෂණික මුදල් රු.500,000 දක්වා</div>
-
-  <div class="amount">
-    <span>ණය මුදල</span>
-    <span>රු <span id="amt">500,000</span></span>
-  </div>
-  <input type="range" min="30000" max="500000" step="10000" value="500000" id="amountRange">
-
-  <div class="amount">
-    <span>කාලය</span>
-    <span><span id="mVal">12</span> මාස</span>
-  </div>
-  <input type="range" min="6" max="24" step="3" value="12" id="monthRange">
-
-  <div class="results">
-    <div class="box">
-      <div class="label">පොලී අනුපාතය</div>
-      <div class="value">0.833% (මාසික)</div>
-    </div>
-    <div class="box">
-      <div class="label">මාසික වාරිකය</div>
-      <div class="value" id="monthly"></div>
-    </div>
-    <div class="box">
-      <div class="label">කාලය</div>
-      <div class="value" id="months"></div>
-    </div>
-    <div class="box">
-      <div class="label">මුළු ගෙවීම</div>
-      <div class="value" id="total"></div>
-    </div>
-  </div>
-
-  <div class="breakdown">
-    <h4>Finance Breakdown</h4>
-    <div class="row"><span>ණය මුදල</span><strong id="bLoan"></strong></div>
-    <div class="row"><span>මුළු පොලිය</span><strong id="bInterest"></strong></div>
-    <div class="row"><span>මාසික වාරිකය</span><strong id="bMonthly"></strong></div>
-    <div class="row"><span>මුළු ගෙවීම</span><strong id="bTotal"></strong></div>
-  </div>
-</div>
-
-<!-- IMAGE -->
-<div class="card image-section">
-  <img src="https://i.ibb.co/q38fVhYM/IMG-0484.png">
-</div>
-
-<!-- FOOTER -->
 <footer class="app-footer">
   <div class="footer-head">
     <div class="footer-logo">eZycredit</div>
@@ -282,7 +162,12 @@ input[type=range]{width:100%;}
 
   <div class="footer-block">
     <h4>Contacts</h4>
-    <div class="footer-item">📞 074 043 6005</div>
+
+    <!-- ✅ CLICKABLE CONTACT NUMBER -->
+    <div class="footer-item">
+      📞 <a href="tel:0740436005" class="contact-link">074 043 6005</a>
+    </div>
+
     <div class="footer-item">✉️ info@eZycredit.lk</div>
     <div class="footer-item">🕒 Mon – Sat : 9 am – 9 pm</div>
   </div>
@@ -295,56 +180,13 @@ input[type=range]{width:100%;}
   </div>
 
   <div class="footer-bottom">
-    © 2025 All Rights Reserved
+    ©️ 2025 All Rights Reserved
   </div>
 </footer>
 
 <div class="sticky">
   <button class="apply">Apply Now</button>
 </div>
-
-<script>
-const amountRange=document.getElementById("amountRange");
-const monthRange=document.getElementById("monthRange");
-const amt=document.getElementById("amt");
-const mVal=document.getElementById("mVal");
-const monthly=document.getElementById("monthly");
-const total=document.getElementById("total");
-const months=document.getElementById("months");
-const bLoan=document.getElementById("bLoan");
-const bInterest=document.getElementById("bInterest");
-const bMonthly=document.getElementById("bMonthly");
-const bTotal=document.getElementById("bTotal");
-
-function calc(){
-  const P=+amountRange.value;
-  const n=+monthRange.value;
-  const r=0.00833;
-  const emi=Math.round(P*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1));
-  const totalPay=emi*n;
-  const interest=totalPay-P;
-
-  amt.innerText=P.toLocaleString();
-  mVal.innerText=n;
-  months.innerText=n+" මාස";
-  monthly.innerText="රු "+emi.toLocaleString();
-  total.innerText="රු "+totalPay.toLocaleString();
-
-  bLoan.innerText="රු "+P.toLocaleString();
-  bInterest.innerText="රු "+interest.toLocaleString();
-  bMonthly.innerText="රු "+emi.toLocaleString();
-  bTotal.innerText="රු "+totalPay.toLocaleString();
-}
-amountRange.oninput=calc;
-monthRange.oninput=calc;
-calc();
-
-/* image animation */
-const img=document.querySelector(".image-section");
-new IntersectionObserver(e=>{
-  if(e[0].isIntersecting) img.classList.add("show");
-}).observe(img);
-</script>
 
 </body>
 </html>
