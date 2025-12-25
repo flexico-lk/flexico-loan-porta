@@ -17,7 +17,6 @@
   --text-muted:#8b98a0;
 }
 
-/* RESET */
 *{box-sizing:border-box;}
 body{
   margin:0;
@@ -40,13 +39,17 @@ body{
 .logo{display:flex;gap:10px;align-items:center;}
 .logo-box{
   width:42px;height:42px;
-  background:linear-gradient(135deg,var(--green),var(--green-dark));
-  color:#fff;
+  background:#fff;
   border-radius:12px;
   display:flex;
   align-items:center;
   justify-content:center;
-  font-weight:800;
+}
+.logo-box img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  border-radius:10px;
 }
 
 /* CARD */
@@ -115,39 +118,15 @@ input[type=range]{width:100%;}
   transform:translateY(0) scale(1);
 }
 
-/* CONTACT */
-.contact-item{
-  display:flex;
-  align-items:center;
-  gap:14px;
+/* CONTACT LINK */
+.contact-link{
   text-decoration:none;
-  margin-bottom:22px;
-}
-.icon-box{
-  width:52px;height:52px;
-  background:var(--green-soft);
-  border-radius:14px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-.icon{width:26px;height:26px;fill:var(--green-dark);}
-.main-text{font-size:18px;font-weight:800;}
-.sub-text{font-size:14px;color:var(--text-muted);}
-
-/* BUTTON */
-.apply{
-  width:100%;
-  padding:14px;
-  background:linear-gradient(90deg,var(--green),var(--green-dark));
-  color:#fff;
-  border:none;
-  border-radius:14px;
-  font-size:18px;
+  color:var(--green-dark);
   font-weight:800;
 }
+.contact-link:hover{text-decoration:underline;}
 
-/* ===== FOOTER (SCREENSHOT MATCH) ===== */
+/* FOOTER */
 .app-footer{
   background:#fff;
   padding:28px 18px;
@@ -159,13 +138,10 @@ input[type=range]{width:100%;}
   align-items:center;
   margin-bottom:24px;
 }
-.footer-logo{
-  font-size:26px;
-  font-weight:800;
-}
+.footer-logo{font-size:26px;font-weight:800;}
+.footer-socials a{margin-left:10px;}
 .footer-socials img{
   width:34px;
-  margin-left:10px;
   opacity:.85;
   transition:.3s;
 }
@@ -174,15 +150,8 @@ input[type=range]{width:100%;}
   transform:scale(1.1);
 }
 .footer-block{margin-bottom:24px;}
-.footer-block h4{
-  font-size:20px;
-  margin-bottom:12px;
-}
-.footer-item{
-  font-size:16px;
-  color:#666;
-  margin:10px 0;
-}
+.footer-block h4{font-size:20px;margin-bottom:12px;}
+.footer-item{font-size:16px;color:#666;margin:10px 0;}
 .footer-links a{
   display:block;
   font-size:16px;
@@ -195,7 +164,6 @@ input[type=range]{width:100%;}
   text-align:center;
   font-size:14px;
   color:#999;
-  margin-top:10px;
 }
 
 /* STICKY */
@@ -205,14 +173,27 @@ input[type=range]{width:100%;}
   left:12px;
   right:12px;
 }
+.apply{
+  width:100%;
+  padding:14px;
+  background:linear-gradient(90deg,var(--green),var(--green-dark));
+  color:#fff;
+  border:none;
+  border-radius:14px;
+  font-size:18px;
+  font-weight:800;
+}
 </style>
 </head>
 
 <body>
 
+<!-- TOP BAR -->
 <div class="topbar">
   <div class="logo">
-    <div class="logo-box">eZ</div>
+    <div class="logo-box">
+      <img src="logo.png" alt="eZycredit Logo">
+    </div>
     <div>
       <strong>eZycredit</strong><br>
       <small style="color:var(--text-muted)">ඔබේ විශ්වාසදායක ණය සහකරු</small>
@@ -274,29 +255,25 @@ input[type=range]{width:100%;}
   <div class="footer-head">
     <div class="footer-logo">eZycredit</div>
     <div class="footer-socials">
-      <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png">
-      <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png">
-      <img src="https://cdn-icons-png.flaticon.com/512/3536/3536505.png">
+      <a href="https://www.facebook.com/share/16uF28yLQD/?mibextid=wwXIfr" target="_blank">
+        <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png">
+      </a>
+      <a href="https://www.instagram.com/" target="_blank">
+        <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png">
+      </a>
     </div>
   </div>
 
   <div class="footer-block">
     <h4>Contacts</h4>
-    <div class="footer-item">📞 074 043 6005</div>
+    <div class="footer-item">
+      📞 <a href="tel:0740436005" class="contact-link">074 043 6005</a>
+    </div>
     <div class="footer-item">✉️ info@eZycredit.lk</div>
     <div class="footer-item">🕒 Mon – Sat : 9 am – 9 pm</div>
   </div>
 
-  <div class="footer-block footer-links">
-    <h4>Legal & Resources</h4>
-    <a href="https://www.facebook.com/share/16uF28yLQD/?mibextid=wwXIfr">Privacy Policy</a>
-    <a href="https://www.facebook.com/share/16uF28yLQD/?mibextid=wwXIfr">Terms & Conditions</a>
-    <a href="https://www.facebook.com/share/16uF28yLQD/?mibextid=wwXIfr">Account Cancellation</a>
-  </div>
-
-  <div class="footer-bottom">
-    © 2025 All Rights Reserved
-  </div>
+  <div class="footer-bottom">© 2025 All Rights Reserved</div>
 </footer>
 
 <div class="sticky">
